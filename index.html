@@ -9,6 +9,16 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://pay.hotmart.com/favicon.ico">
 
+  <!-- Google tag (gtag.js) - Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R23ZDDF2F4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-R23ZDDF2F4');
+  </script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,7 +109,7 @@
         <a href="#faq" class="hover:text-purple-400 transition-colors">Dúvidas</a>
       </div>
 
-      <a href="https://pay.hotmart.com/E107714369O?off=uf0gjort&hotfeature=51" target="_blank" class="bg-gradient-to-r from-brand-purple to-pink-600 hover:from-purple-600 hover:to-pink-500 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-brand-purple/30 transform hover:scale-[1.02] transition-all">
+      <a href="https://pay.hotmart.com/E107714369O?off=uf0gjort&hotfeature=51&sck=site_navbar" target="_blank" class="bg-gradient-to-r from-brand-purple to-pink-600 hover:from-purple-600 hover:to-pink-500 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-brand-purple/30 transform hover:scale-[1.02] transition-all">
         Garantir Acesso • R$ 39,90
       </a>
     </div>
@@ -162,7 +172,7 @@
 
       <!-- Chamada para Ação Imediata -->
       <div class="mt-10">
-        <a href="https://pay.hotmart.com/E107714369O?off=uf0gjort&hotfeature=51" target="_blank" class="inline-block bg-gradient-to-r from-brand-purple via-purple-600 to-pink-600 hover:from-purple-600 hover:to-pink-500 text-white font-extrabold text-lg sm:text-xl px-10 py-5 rounded-2xl shadow-2xl shadow-brand-purple/40 transform hover:scale-[1.02] transition-all">
+        <a href="https://pay.hotmart.com/E107714369O?off=uf0gjort&hotfeature=51&sck=site_hero" target="_blank" class="inline-block bg-gradient-to-r from-brand-purple via-purple-600 to-pink-600 hover:from-purple-600 hover:to-pink-500 text-white font-extrabold text-lg sm:text-xl px-10 py-5 rounded-2xl shadow-2xl shadow-brand-purple/40 transform hover:scale-[1.02] transition-all">
           QUERO APRENDER A CRIAR MEU CLONE AGORA
         </a>
         <div class="flex items-center justify-center gap-4 text-xs text-slate-400 mt-4">
@@ -531,7 +541,7 @@
         </div>
 
         <!-- Botão Hotmart -->
-        <a href="https://pay.hotmart.com/E107714369O?off=uf0gjort&hotfeature=51" target="_blank" class="block w-full bg-gradient-to-r from-brand-purple via-purple-600 to-pink-600 hover:from-purple-600 hover:to-pink-500 text-white font-extrabold text-lg sm:text-xl py-5 rounded-2xl shadow-2xl shadow-brand-purple/40 transform hover:scale-[1.02] transition-all">
+        <a href="https://pay.hotmart.com/E107714369O?off=uf0gjort&hotfeature=51&sck=site_oferta" target="_blank" class="block w-full bg-gradient-to-r from-brand-purple via-purple-600 to-pink-600 hover:from-purple-600 hover:to-pink-500 text-white font-extrabold text-lg sm:text-xl py-5 rounded-2xl shadow-2xl shadow-brand-purple/40 transform hover:scale-[1.02] transition-all">
           QUERO GARANTIR MEU ACESSO POR R$ 39,90
         </a>
 
@@ -636,7 +646,7 @@
 
     <!-- CTA Final pós-FAQ -->
     <div class="mt-14 text-center">
-      <a href="https://pay.hotmart.com/E107714369O?off=uf0gjort&hotfeature=51" target="_blank" class="inline-block bg-gradient-to-r from-brand-purple to-pink-600 hover:from-purple-600 hover:to-pink-500 text-white font-extrabold text-lg px-10 py-5 rounded-2xl shadow-xl shadow-brand-purple/40 transform hover:scale-[1.02] transition-all">
+      <a href="https://pay.hotmart.com/E107714369O?off=uf0gjort&hotfeature=51&sck=site_rodape" target="_blank" class="inline-block bg-gradient-to-r from-brand-purple to-pink-600 hover:from-purple-600 hover:to-pink-500 text-white font-extrabold text-lg px-10 py-5 rounded-2xl shadow-xl shadow-brand-purple/40 transform hover:scale-[1.02] transition-all">
         QUERO COMEÇAR AGORA POR R$ 39,90
       </a>
     </div>
@@ -655,6 +665,25 @@
       </p>
     </div>
   </footer>
+
+  <!-- Rastreamento de Cliques no Checkout (Eventos GA4) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var checkoutButtons = document.querySelectorAll('a[href*="pay.hotmart.com"]');
+      checkoutButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          if (typeof gtag === 'function') {
+            gtag('event', 'begin_checkout', {
+              event_category: 'Conversao',
+              event_label: btn.textContent.trim().replace(/\s+/g, ' '),
+              value: 39.90,
+              currency: 'BRL'
+            });
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
