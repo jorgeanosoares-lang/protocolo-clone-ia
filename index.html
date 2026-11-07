@@ -37,6 +37,17 @@
     gtag('config', 'G-R23ZDDF2F4');
   </script>
 
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/pt_BR/fbevents.js');
+    fbq('init', '2618566368644203');
+    fbq('track', 'PageView');
+  </script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,6 +118,9 @@
   </style>
 </head>
 <body class="antialiased selection:bg-brand-purple selection:text-white">
+  <!-- Meta Pixel (fallback sem JS) -->
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2618566368644203&ev=PageView&noscript=1"/></noscript>
 
   <!-- NAVBAR FLUTUANTE -->
   <header class="fixed top-0 left-0 right-0 z-50 glass-header py-3.5 px-6">
@@ -684,12 +698,42 @@
     </div>
   </footer>
 
-  <!-- Rastreamento de Cliques no Checkout (Eventos GA4) -->
+  <!-- Rastreamento de Cliques no Checkout (Eventos GA4 + Meta Pixel) -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // ViewContent: dispara uma vez, quando o vídeo começa a tocar
+      var player = document.querySelector('video');
+      if (player) {
+        var videoTracked = false;
+        player.addEventListener('play', function() {
+          if (videoTracked) return;
+          videoTracked = true;
+          if (typeof fbq === 'function') {
+            fbq('track', 'ViewContent', {
+              content_name: 'VSL Protocolo Clone de IA',
+              content_type: 'video',
+              value: 39.90,
+              currency: 'BRL'
+            });
+          }
+          if (typeof gtag === 'function') {
+            gtag('event', 'video_play', { event_category: 'Engajamento', value: 39.90, currency: 'BRL' });
+          }
+        });
+      }
+
       var checkoutButtons = document.querySelectorAll('a[href*="pay.hotmart.com"]');
       checkoutButtons.forEach(function(btn) {
         btn.addEventListener('click', function() {
+          if (typeof fbq === 'function') {
+            fbq('track', 'InitiateCheckout', {
+              content_name: 'Protocolo Clone de IA',
+              content_type: 'product',
+              value: 39.90,
+              currency: 'BRL',
+              num_items: 1
+            });
+          }
           if (typeof gtag === 'function') {
             gtag('event', 'begin_checkout', {
               event_category: 'Conversao',
