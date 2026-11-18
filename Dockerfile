@@ -1,9 +1,10 @@
 FROM nginx:alpine
 
-# Copia os arquivos do site para a pasta raiz do Nginx
-COPY . /usr/share/nginx/html
+RUN rm -f /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY index.html privacidade.html termos.html favicon.svg /usr/share/nginx/html/
+COPY midia /usr/share/nginx/html/midia
 
-# Porta padrao HTTP
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
